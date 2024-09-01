@@ -1,0 +1,21 @@
+meta {
+  name: add friend
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/users/friends
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyZDEzMzRhYzM2MjE2Yzc3NjQ5NDkiLCJpYXQiOjE3MjUwOTIzMzEsImV4cCI6MTcyNTA5NTkzMX0.ZCK9CQov74fLmxopuz26nJLFtgwz4aP_B-eNefxbdXM
+}
+
+body:json {
+  {
+    "username": "scott"
+  }
+}

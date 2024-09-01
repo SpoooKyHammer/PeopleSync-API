@@ -1,0 +1,15 @@
+meta {
+  name: get friends
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/users/friends
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQzMDA2YmEwMzc4YjdhMjYzMjQ4ZTYiLCJpYXQiOjE3MjUxMDUwODUsImV4cCI6MTcyNTEwODY4NX0.cj-dPZVqqeOAYylUjAcsAk-B78-0SGsxPcGL2gknW_4
+}
