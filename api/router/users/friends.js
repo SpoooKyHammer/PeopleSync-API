@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const { usersModel } = require("./../../schema/user");
+const { User } = require("./../../schema/user");
 
 const friendsRouter = Router();
 
@@ -61,7 +61,7 @@ const friendsRouter = Router();
  */
 friendsRouter.get("/", async (req, res) => {
   try {
-    const user = await usersModel.findById(req.userId);
+    const user = await User.findById(req.userId);
 
     if (!user) res.sendStatus(404);
     
@@ -149,9 +149,9 @@ friendsRouter.post("/", async (req, res) => {
   if (!username) return res.sendStatus(400);
   
   try {
-    const user = await usersModel.findById(req.userId);
+    const user = await User.findById(req.userId);
 
-    const friend = await usersModel.findOne({ username });
+    const friend = await User.findOne({ username });
 
     if (!friend) return res.sendStatus(404);
     
@@ -224,9 +224,9 @@ friendsRouter.delete("/:username", async (req, res) => {
   if (!username) return res.sendStatus(400);
   
   try {
-    const user = await usersModel.findById(req.userId);
+    const user = await User.findById(req.userId);
 
-    const friend = await usersModel.findOne({ username });
+    const friend = await User.findOne({ username });
 
     if (!friend) return res.sendStatus(404);
     
@@ -301,9 +301,9 @@ friendsRouter.put("/accept", async (req, res) => {
   if (!username) return res.sendStatus(400);
 
   try {
-    const user = await usersModel.findById(req.userId);
+    const user = await User.findById(req.userId);
 
-    const friend = await usersModel.findOne({ username });
+    const friend = await User.findOne({ username });
 
     if (!friend) return res.sendStatus(404);
     
@@ -380,9 +380,9 @@ friendsRouter.put("/reject", async (req, res) => {
   if (!username) return res.sendStatus(400);
 
   try {
-    const user = await usersModel.findById(req.userId);
+    const user = await User.findById(req.userId);
 
-    const friend = await usersModel.findOne({ username });
+    const friend = await User.findOne({ username });
 
     if (!friend) return res.sendStatus(404); 
     

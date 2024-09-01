@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const bcrypt = require("bcryptjs");
 
-const { usersModel } = require("./../../schema/user");
+const { User } = require("./../../schema/user");
 
 const registerRouter = Router();
 
@@ -54,7 +54,7 @@ registerRouter.post("/", async (req, res) => {
   }
 
   try {
-    const user = new usersModel({ username , passwordHash: hashedPassword});
+    const user = new User({ username , passwordHash: hashedPassword});
     await user.save();
     res.sendStatus(201);
   } catch (e) {

@@ -2,7 +2,7 @@ const { Router } = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const { usersModel } = require("./../../schema/user");
+const { User } = require("./../../schema/user");
 
 const loginRouter = Router();
 
@@ -57,7 +57,7 @@ loginRouter.post("/", async (req, res) => {
   if (!username || !password) return res.sendStatus(400);
   
   try {
-    const user = await usersModel.findOne({ username });
+    const user = await User.findOne({ username });
 
     if (!user) return res.sendStatus(404);
 
