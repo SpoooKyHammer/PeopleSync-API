@@ -12,7 +12,13 @@ post {
 
 body:json {
   {
-    "username": "tim",
-    "password": "tim"
+    "username": "bob",
+    "password": "bob"
   }
+}
+
+script:post-response {
+  const token = res.body.token;
+  
+  bru.setEnvVar("token",token)
 }

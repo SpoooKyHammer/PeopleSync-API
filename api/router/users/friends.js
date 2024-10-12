@@ -61,23 +61,15 @@ const friendsRouter = Router();
  */
 friendsRouter.get("/", async (req, res) => {
   try {
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.userId)
+      .populate("friends")
+      .populate("friendRequests");
 
     if (!user) res.sendStatus(404);
     
-    const friendIds = user.friends.map(f => f._id);
-    const friendRequestIds = user.friendRequests.map(f => f._id);
-   
-    let friends = [];
-    let friendRequests = [];
-
-    if (friendIds.length > 0) friends = await usersModel.find({ _id: { $in: friendIds } });
-    
-    if (friendRequestIds.length > 0) friendRequests = await usersModel.find({ _id: { $in: friendRequestIds } });
-    
     const payload = {
-      friends: friends.map(f => ({ id: f._id, username: f.username })),
-      friendRequests: friendRequests.map(f => ({ id: f._id, username: f.username }))
+      friends: user.friends.map(f => ({ id: f._id, username: f.username })),
+      friendRequests: user.friendRequests.map(f => ({ id: f._id, username: f.username }))
     }
     
     res.status(200).json(payload);
