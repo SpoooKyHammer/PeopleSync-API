@@ -15,19 +15,20 @@ router.get("/", async (req, res) => {
       });
       
       return {
-        _id: f._id,
+        id: f._id,
         username: f.username,
         chatId: chat?._id
       };
     }));
 
-    const friendRequestsWithIdAndUsername = user.friendRequests.map(f => ({_id: f._id, username: f.username }));
+    const friendRequestsWithIdAndUsername = user.friendRequests.map(f => ({id: f._id, username: f.username }));
 
     const groups = user.groups.map(g => ({ _id: g._id, username: g.name }));
 
     // Attach the updated friends array to the user object
     const userWithFriends = {
       ...user._doc,
+      id: user._id,
       friends: friendsWithChatIds,
       friendRequests: friendRequestsWithIdAndUsername,
       groups
