@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
     const friendRequestsWithIdAndUsername = user.friendRequests.map(f => ({id: f._id, username: f.username }));
 
-    const groups = user.groups.map(g => ({ _id: g._id, username: g.name }));
+    const groups = user.groups.map(g => ({ id: g._id, username: g.name }));
 
     // Attach the updated friends array to the user object
     const userWithFriends = {
