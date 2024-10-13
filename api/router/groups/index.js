@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { Group } = require('./../../schema/group');
+const { User } = require("./../../schema/user");
 const router = Router();
 
 /**
