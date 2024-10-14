@@ -5,7 +5,17 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const user = await User.findById(req.userId).populate('friends').populate('friendRequests').populate('groups');
+    const user = await User.findById(req.userId)
+      .populate('friends')
+      .populate('friendRequests')
+      .populate({
+        path: 'groups',
+        populate: {
+          path: 'participants',
+          select: 'username _id'
+        }
+    });
+    
     const friendsWithChatIds = await Promise.all(user.friends.map(async (f) => {
       const chat = await Chat.findOne({
         participants: {
@@ -23,7 +33,14 @@ router.get("/", async (req, res) => {
 
     const friendRequestsWithIdAndUsername = user.friendRequests.map(f => ({id: f._id, username: f.username }));
 
-    const groups = user.groups.map(g => ({ id: g._id, username: g.name }));
+    const groups = user.groups.map(g => ({ 
+      id: g._id,
+      username: g.name,
+      participants: g.participants.map(p => ({
+        id: p._id,
+        username: p.username
+      }))
+    }));
 
     // Attach the updated friends array to the user object
     const userWithFriends = {
