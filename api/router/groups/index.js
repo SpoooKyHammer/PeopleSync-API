@@ -213,7 +213,7 @@ router.post('/:groupId/users', async (req, res) => {
   try {
     const group = await Group.findById(groupId);
     
-    if (!group || !group.participants.includes(req.user._id)) {
+    if (!group || !group.participants.includes(req.userId)) {
       return res.status(403).json({ message: "Not authorized." });
     }
 
@@ -332,7 +332,7 @@ router.delete('/:groupId/users/:userId', async (req, res) => {
   try {
     const group = await Group.findById(groupId);
     
-    if (!group || !group.participants.includes(req.user._id)) {
+    if (!group || !group.participants.includes(req.userId)) {
       return res.status(403).json({ message: "Not authorized." });
     }
 
