@@ -355,4 +355,22 @@ router.delete('/:groupId/users/:userId', async (req, res) => {
 });
 
 
+router.get('/:groupId/messages', async (req, res) => {
+  const { groupId } = req.params;
+
+  try {
+    const group = await Group.findById(groupId).populate({
+      path: 'messages',
+      populate: { path: 'sender' }
+    });
+
+    if (!group || !group.participants.includes(req.userId)) {
+      return res.status(403).json({ message: "Not authorized." });
+    }
+
+    res.json(group.messages);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 module.exports = router;
