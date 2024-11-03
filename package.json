@@ -2,15 +2,13 @@
   "name": "people-sync-api",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "",
+  "author": "Romulus Darwin",
   "license": "ISC",
   "description": "",
   "scripts": {
     "build": "docker build -t people-sync-api .",
     "start": "docker compose down && docker compose up"
   },
-  "author": "Romulus Darwin",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -19,7 +17,7 @@
     "jsonwebtoken": "^9.0.2",
     "kafkajs": "^2.2.4",
     "mongoose": "^8.4.5",
-    "socket.io": "^4.7.5",
+    "socket.io": "^4.8.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "validator": "^13.12.0"

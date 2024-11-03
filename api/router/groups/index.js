@@ -361,7 +361,7 @@ router.get('/:groupId/messages', async (req, res) => {
   try {
     const group = await Group.findById(groupId).populate({
       path: 'messages',
-      populate: { path: 'sender' }
+      populate: { path: 'sender', select: '_id username' }
     });
 
     if (!group || !group.participants.includes(req.userId)) {

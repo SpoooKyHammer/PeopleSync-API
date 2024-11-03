@@ -112,7 +112,13 @@ router.post('/', async (req, res) => {
       await Group.findByIdAndUpdate(group, { $push: { messages: message._id } });
     }
 
-    res.status(201).json(message.populate("sender"));
+    const io = req.app.get("io");
+    
+    const messageWithSender = await message.populate("sender", "_id username");
+
+    io.to(chat || group).emit("newMessage", messageWithSender);
+
+    res.status(201).json(messageWithSender);
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: err.message });
