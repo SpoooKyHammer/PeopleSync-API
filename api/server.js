@@ -27,6 +27,10 @@ io.on("connection", (socket) => {
   socket.on("joinChat", (chatId) => {
     socket.join(chatId);
   });
+
+  socket.on("leaveChat", (chatId) => {
+    socket.leave(chatId);
+  });
 });
 
 app.use(express.json());
